@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Herança da Vovó Milionária</title>
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./js/ui.mjs"></script>
+</head>
+<body>
+<header class="masthead"><p class="eyebrow">JOGO DE TABULEIRO · 2 A 4 PARTICIPANTES</p>
+<h1>Herança da <em>Vovó Milionária</em></h1>
+<p>Explore a mansão, encontre a chave e chegue ao cofre antes que alguém a roube.</p></header>
+<main>
+<section id="setup" class="paper setup">
+  <h2>Prepare a partida</h2>
+  <div class="modes">
+    <button id="local" aria-pressed="true">Mesmo computador</button>
+    <button id="computer" aria-pressed="false">Contra a IA</button>
+  </div>
+  <form id="config">
+    <label>Participantes <select id="count"><option>2</option><option>3</option><option>4</option></select></label>
+    <label id="difficultyLabel" hidden>Dificuldade <select id="difficulty"><option value="easy">Fácil</option><option value="medium" selected>Médio</option><option value="hard">Difícil</option></select></label>
+    <div id="participants"></div>
+    <button class="primary" type="submit">Entrar na mansão</button>
+  </form>
+</section>
+<section id="game" hidden>
+  <div class="layout">
+    <section class="paper manor"><h2>Mapa da mansão</h2><p class="hint">As linhas e colunas indicam a posição de cada casa.</p>
+      <div class="table-controls">
+        <div id="dice" class="dice" data-value="1" role="img" aria-label="Dado de exploração pronto">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="turn-controls">
+          <p class="eyebrow">DADO DE EXPLORAÇÃO · 1 A 3</p>
+          <p id="status" tabindex="-1" aria-live="polite"></p>
+          <button id="action" class="primary"></button>
+        </div>
+      </div>
+      <div class="board-scroll" tabindex="0" aria-label="Mapa da mansão">
+        <div id="board" aria-label="Tabuleiro com 25 casas"></div>
+      </div>
+    </section>
+    <aside class="paper sidebar">
+      <p class="eyebrow">PARTIDA</p><h2 id="turn" tabindex="-1"></h2>
+      <p id="objective" aria-live="polite"></p>
+      <h3>Ordem dos turnos</h3><ol id="order"></ol>
+      <h3>Diário da mansão</h3><ul id="history"></ul>
+      <button id="restart">Nova partida</button>
+    </aside>
+  </div>
+</section>
+<details class="paper rules">
+  <summary>Como jogar</summary>
+  <p>Todos começam no Hall. O maior resultado no dado de 6 lados joga primeiro. Os demais jogam em ordem crescente. Empates são decididos com novas rolagens entre os empatados.</p>
+  <p>Role o dado de exploração e ande exatamente de 1 a 3 passos, conforme o resultado. Escolha casas adjacentes na horizontal ou vertical. Você pode virar durante o trajeto e visitar cada casa uma vez por turno.</p>
+  <p>Entre em uma casa comum para virar sua face. Hall, chave, cofre, passagens e casas interditadas permanecem abertos após serem revelados. A Faxineira e a Doméstica bloqueiam sua casa assim que aparecem e encerram o movimento.</p>
+  <p><strong>Pare na chave para pegá-la. Depois, pare no cofre com a chave para vencer.</strong> Se outro peão parar na casa do portador no último passo do dado, rouba a chave. O tile de origem da chave fica sem efeito após a coleta.</p>
+  <p>Os gatos fazem perder o próximo turno. A escada para subir avança na direção do último passo e a de descer volta à casa anterior. Café e chá dão um passo extra, exceto à esquerda e à direita, respectivamente. As duas passagens abertas permitem viajar de uma porta à outra. Deslocamentos extras não ativam outros efeitos.</p>
+  <p>Mordomo e Governanta permitem espiar uma casa oculta em particular. No modo local, peça aos outros participantes que desviem o olhar durante a espiada.</p>
+</details>
+</main>
+<dialog id="secret"><h2>Espiada particular</h2><p id="secretTile"></p><button id="closeSecret" class="primary">Fechar espiada</button></dialog>
+</body>
+</html>
